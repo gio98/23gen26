@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz 4 anos y 3 meses juntos!!</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Libreria Confetti per l'effetto festa -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: darkgreen;
+            --secondary-color: #ff8fa3;
+            --bg-color: thistle;
+            --text-color: #590d22;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: url(paris.jpg);
+            background-repeat: no-repeat;
+            background-size: 43pc 54pc;
+            background-position-x: -17pc;
+            background-position-y: 0pc;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Parisienne', cursive;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            
+            position: relative;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 4rem;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease;
+        }
+        .tiamo {
+            word-spacing: 1rem;
+            margin-top: -1rem;
+            font-size: 2.5rem !important;
+        }
+        .heart-beat {
+            font-size: 16rem;
+            color: var(--primary-color);
+            animation: heartbeat 1.2s infinite;
+            cursor: pointer;
+            margin-top: -5rem;
+            opacity: 0.6;
+        }
+
+        /* Timer Section */
+        .timer-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin: 20px;
+            border-radius: 20px;
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .timer-box {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .timer-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .timer-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .photo-card {
+            background: var(--white);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .photo-card:hover {
+            transform: rotate(0) scale(1.05);
+            z-index: 10;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #ffccd5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            color: var(--primary-color);
+            font-size: 3rem;
+        }
+
+        .photo-caption {
+            margin-top: 10px;
+            font-family: 'Parisienne', cursive;
+            font-size: 1.2rem;
+        }
+
+        /* Letter Section */
+        .letter-section {
+            padding: 80px 20px;
+            background: var(--bg-color);
+            text-align: center;
+        }
+
+        .letter-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .letter-container::before {
+            content: '"';
+            font-family: 'Parisienne', cursive;
+            font-size: 8rem;
+            color: var(--secondary-color);
+            position: absolute;
+            top: -40px;
+            left: 20px;
+            opacity: 0.5;
+        }
+
+        .letter-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* Animations */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating Hearts Background */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -100px;
+            font-size: 20px;
+            color: rgba(255, 77, 109, 0.4);
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+        .scrittanomi {
+            position: absolute;
+            left: 5pc;
+            color: white;
+            font-size: 6pc;
+            top: 6pc;
+        }
+
+        /* Romantic Parisian Modal */
+        .paris-modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10,6,8,0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 300ms ease;
+            z-index: 2000;
+            backdrop-filter: blur(3px) saturate(120%);
+        }
+
+        .paris-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .paris-modal-card {
+            width: min(720px, 92%);
+            background: linear-gradient(180deg, rgba(255,245,247,0.98) 0%, rgba(255,238,242,0.95) 100%);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 20px 50px rgba(9,6,12,0.45);
+            position: relative;
+            font-family: 'Parisienne', cursive;
+            color: #3b0b1a;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.98);
+            transition: transform 300ms ease, opacity 300ms ease;
+        }
+
+        .paris-modal.open .paris-modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .paris-modal .close-btn {
+            position: absolute;
+            right: 14px;
+            top: 12px;
+            background: transparent;
+            border: 0;
+            font-size: 1.6rem;
+            color: #8b1e33;
+            cursor: pointer;
+        }
+
+        .paris-header {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .paris-header .title {
+            font-size: 2.4rem;
+            line-height: 1;
+            color: #a31f3d;
+        }
+
+        .paris-content {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .paris-tower {
+            width: 120px;
+            height: 140px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="%23a31f3d" d="M32 2 L26 18 L36 18 Z M30 18 L20 40 L44 40 L34 18 Z M22 44 L42 44 L40 48 L24 48 Z"/></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 6px 8px rgba(163,31,61,0.15));
+        }
+
+        .romantic-text {
+            font-size: 1.05rem;
+            color: #50101b;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,240,245,0.25));
+            padding: 12px 14px;
+            border-radius: 10px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+        }
+
+        .paris-rose {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #ffd6e0 30%, #ff90a8 100%);
+            box-shadow: 0 6px 18px rgba(163,31,61,0.12);
+        }
+
+        .open-modal-btn {
+            background: #a31f3d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Parisienne', cursive;
+            font-size: 1.8rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(163, 31, 61, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            animation: fadeInUp 2s ease;
+        }
+
+        .open-modal-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 25px rgba(163, 31, 61, 0.5);
+            background: #c92a4e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sfondo animato -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Feliz 4 Anos y 3 Meses Juntos!</h1>
+        <div class="heart-beat" onclick="celebrate()">❤️ <span class="scrittanomi">A+G </span> <br> <span style="position: absolute;
+    top: 6pc;
+    left: 6.7pc;
+    color: aliceblue;
+    font-size: 12rem;">∞</span></div>
+      
+        <h1 class="tiamo">Ti amo immensamente mi compagnera de Vida!!!</h1>
+      
+    </section>
+
+  
+    <div id="letterModal" class="paris-modal">
+        <div class="paris-modal-card">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            
+            <div class="paris-header">
+            
+               
+            </div>
+
+            <div class="paris-content">
+               
+                <div class="romantic-text">
+                    <p>
+                    
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JS -->
+    <script>
+       
+        // --- EFFETTO CUORI FLUTTUANTI ---
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartCount = 15;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        createFloatingHearts();
+
+        // --- CELEBRAZIONE (CONFETTI) ---
+        function celebrate() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#ff8fa3', '#ffffff']
+            });
+            
+            // Effetto a cascata
+            var end = Date.now() + (2 * 1000);
+            var colors = ['#ff4d6d', '#ffffff'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+            openModal();
+        }
+
+
+
+        // --- MODALE ---
+        function openModal() {
+            document.getElementById('letterModal').classList.add('open');
+            // Lanciamo un po' di confetti anche qui
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.7 },
+                colors: ['#a31f3d', '#ffd6e0']
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('letterModal').classList.remove('open');
+        }
+        
+        // Chiudi modale cliccando fuori
+        document.getElementById('letterModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
